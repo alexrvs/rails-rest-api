@@ -38,6 +38,7 @@ gem 'pg', '~> 0.21.0'
 gem 'faker', '~> 1.8', '>= 1.8.7'
 gem 'swagger-docs'
 gem 'active_model_serializers', '~> 0.10.7'
+gem 'factory_girl_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

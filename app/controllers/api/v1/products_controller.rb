@@ -1,19 +1,29 @@
 module Api
   module V1
     class ProductsController < ApplicationController
-      before_action
 
       def index
         @products = Product.all()
-        render json: {status: 200, data: @products}
-
+        render json: @products, each_serializer: Api::V1::ProductSerializer
       end
 
       def show
-        render json: {status: 200, }
+        render json: @user, serializer: ProductSerializer
 
       end
 
+
+      def create=
+
+      end
+
+      def update=
+
+      end
+
+      def edit=
+
+      end
 
       private
 
