@@ -1,7 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  include Knock::Authenticable
-  #undef_method :current_user
+
+  protected
+
+    def after_sign_in_path_for(resource)
+      if current_user
+        products_path
+      else
+        stored_location_for(resource)
+      end
+
+    end
+
+
 end
 
 
