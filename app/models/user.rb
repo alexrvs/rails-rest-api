@@ -11,8 +11,7 @@ class User < ApplicationRecord
 
   attr_accessor :name, :email, :password, :password_confirmation, :remember_me
 
-  validates :role,
-            :first_name,
+  validates :first_name,
             :last_name,
             :phone,
             :email,
