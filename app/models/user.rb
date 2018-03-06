@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   before_save :ensure_authentication_token
 
-  attr_accessor :name, :email, :password, :password_confirmation, :remember_me
+  #attr_accessor :name, :email, :password, :password_confirmation, :remember_me
 
   validates :email, presence: true
 
@@ -36,8 +36,7 @@ class User < ApplicationRecord
 
   def full_name
 
-    full_name = @full_name.split
-
+    full_name ||= @full_name.split
     "Full Name -  #{full_name.first} #{full_name.last}"
   end
 
