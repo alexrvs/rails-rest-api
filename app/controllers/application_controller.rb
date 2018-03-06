@@ -1,17 +1,34 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  attr_reader :current_user
 
   protected
 
-    def after_sign_in_path_for(resource)
-      if current_user
-        products_path
-      else
-        stored_location_for(resource)
-      end
-
+  def authenticate_request!
+    unless user_id_in_token?
+      render json: {errors: ['No Authenticated'], status: unauthorized}
+      return
     end
+    @current_user = User.find(auth_token[:user_id])
+  rescue JWT::VerificationError, JWT::DecodeError
+    render json: {errors: ['No Authenticated'], status: unauthorized}
 
+  end
+
+  private
+
+  def http_token
+    @http_token ||= if request.headers['Authorization'].present?
+       request.headers['Authorization'].split(' ').last
+    end
+  end
+
+  def auth_token
+    @auth_token ||= JWT.decode(http_token)
+  end
+
+  def user_id_in_token?
+    http_token && auth_token && auth_token[:user_id].to_i
+  end
 
 end
 

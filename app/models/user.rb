@@ -11,15 +11,7 @@ class User < ApplicationRecord
 
   attr_accessor :name, :email, :password, :password_confirmation, :remember_me
 
-  validates :first_name,
-            :last_name,
-            :phone,
-            :email,
-            :address,
-            :city,
-            :state,
-            :zip,
-            presence: true
+  validates :email, presence: true
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -30,6 +22,28 @@ class User < ApplicationRecord
 
   def skip_confirmation!
     self.confirmed_at = Time.now
+  end
+
+
+  def name
+    "User name: #{@name}"
+  end
+
+
+  def name=(value)
+    @name = "Awesome #{value}"
+  end
+
+  def full_name
+
+    full_name = @full_name.split
+
+    "Full Name -  #{full_name.first} #{full_name.last}"
+  end
+
+
+  def full_name=(value)
+    @full_name = value
   end
 
 end
