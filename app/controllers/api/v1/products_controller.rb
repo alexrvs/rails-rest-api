@@ -2,26 +2,19 @@ module Api
   module V1
     class ProductsController < ApplicationController
 
+
+
       def index
         @products = Product.all()
         render json: @products, each_serializer: Api::V1::ProductSerializer
       end
 
       def show
-        render json: @user, serializer: ProductSerializer
+        render json: @product, serializer: ProductSerializer
 
       end
 
-
-      def create=
-
-      end
-
-      def update=
-
-      end
-
-      def edit=
+      def create
 
       end
 
